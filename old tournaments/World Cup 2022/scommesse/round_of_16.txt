@@ -1,0 +1,9 @@
+home	away	home win	draw	away win	mlo	mlo prob		bwin
+Netherlands	United States	0.471	0.298	0.231	1-0	(0.164)		
+Argentina	Australia	0.665	0.246	0.089	1-0	(0.208)		
+France	Poland	0.620	0.235	0.145	1-0	(0.145)		
+England	Senegal	0.632	0.235	0.132	1-0	(0.162)		
+Japan	Croatia	0.363	0.288	0.349	1-1	(0.122)		
+Brazil	South Korea	0.740	0.190	0.070	1-0	(0.171)		
+Morocco	Spain	0.168	0.270	0.562	0-1	(0.173)		
+Portugal	Switzerland	0.486	0.273	0.241	1-0	(0.141)		

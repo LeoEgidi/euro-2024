@@ -1,0 +1,3 @@
+\contentsline {section}{The statistical model (in brief)}{1}{section*.2}
+\contentsline {section}{Quarter of finals predictions (9-10 December)}{2}{section*.3}
+\contentsline {section}{Predictive performance results}{2}{section*.4}

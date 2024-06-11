@@ -1,0 +1,125 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  10pt,
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={EURO 2020 bet strategy: semifinals},
+  pdfauthor={Leonardo Egidi - DEAMS, University of Trieste, Italy. Mail: legidi@units.it},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{color}
+\usepackage{bm}
+
+\title{EURO 2020 bet strategy: semifinals}
+\author{Leonardo Egidi - DEAMS, University of Trieste, Italy. Mail:
+\href{mailto:legidi@units.it}{\nolinkurl{legidi@units.it}}}
+\date{5 July 2021}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\textbf{Totale}: 160 euro
+
+\emph{1X2}: 67 euro
+
+\emph{Risultati secchi}: 20 euro
+
+\emph{Finaliste}: 52 euro
+
+\emph{Vincente manifestazione}: 21 euro
+
+Criterio del principio atteso per le puntate + criterio di Kelly per
+stabilire quanto puntare su ciascuna partita.
+
+\begin{longtable}[]{@{}lllllllll@{}}
+\toprule
+& 1 & X & 2 & Rule & Puntate & punt. secchi & Atteso & Atteso
+secchi\tabularnewline
+\midrule
+\endhead
+Ita-Spa & 1.17 & 0.87 & 0.75 & 1 & 30 & 10e (1-0) & 72 &
+80\tabularnewline
+Eng-Dan & 0.87 & 0.97 & 1.19 & X2 & 37 & 10e (1-0) & 74 &
+60\tabularnewline
+&  &  & & & & \tabularnewline
+& winning prob. & exp. profit & quote  & & & \tabularnewline
+\bottomrule
+Denmark & 0.14 & 1.4 & & Den & 6 & & 60 &\tabularnewline
+Ita & 0.342 & 1.11 & & Ita & 15 & & 48.75 &\tabularnewline
+Spain & 0.223 & 0.84 & & & & & &\tabularnewline
+Eng & 0.294 & 0.74 & & & & & &\tabularnewline
+&  &  & & & & \tabularnewline
+& &qual. exp. profit &   & & & \tabularnewline
+\bottomrule
+Ita & 1.05825 & 0.747225 & & Ita & 52 & & 88.4 &\tabularnewline
+Den & 0.850535 & 1.10175 & & Den & 0 & & 0 &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{document}

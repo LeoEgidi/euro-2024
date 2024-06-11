@@ -1,0 +1,5 @@
+\contentsline {section}{The statistical model (in brief)}{1}{section*.2}
+\contentsline {section}{Predictions: semi-finals (6-7 July)}{2}{section*.3}
+\contentsline {section}{Expected number of goals}{2}{section*.4}
+\contentsline {section}{Estimated attack/defence abilities}{3}{section*.5}
+\contentsline {section}{Euro 2020 winning probabilities}{3}{section*.6}

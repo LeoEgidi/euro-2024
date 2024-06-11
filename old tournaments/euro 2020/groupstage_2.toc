@@ -1,0 +1,2 @@
+\contentsline {section}{The statistical model (in brief)}{1}{section*.2}
+\contentsline {section}{Groupstage predictions: 2nd day (16-19 June)}{1}{section*.3}

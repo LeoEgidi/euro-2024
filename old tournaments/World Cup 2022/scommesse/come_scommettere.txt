@@ -1,0 +1,22 @@
+Date le quote inverse dei bookies:
+
+q_1, q_2, q_3.
+
+Calcolare le probabilità indotte dai bookies nel seguente modo:
+
+
+p*_1 = q_1/sum(q_1, q_2, q_3)
+p*_2 = q_2/sum(q_1, q_2, q_3)
+p*_3 = q_3/sum(q_1, q_2, q_3)
+
+A questo punto confrontare le probabilità del modello p_1, p_2 e p_3
+con p*_1, p*_2, p*_3 e scommettere su quell'evento in cui la differenza è molto grande:
+
+quindi scommetto su evento 'x' tale per cui il rapporto tra modello e quote:
+
+p_x/p*_x 
+
+è il massimo dei tre eventi possibili. Il rapporto qui sopra però deve essere maggiore di 1 per scommetterci.
+
+(Nicola aveva scelto di scommettere su 12 su 16 guardando anche a un ordinamento di queste
+soglie, per esempio prendendo le 12 più grandi tra le 16 a disposizione).

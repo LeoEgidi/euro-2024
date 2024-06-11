@@ -1,0 +1,147 @@
+---
+title: "EURO 2020 bet strategy: semifinals"
+author: "Leonardo Egidi - DEAMS, University of Trieste, Italy. Mail: legidi@units.it"
+date: "5 July 2021"
+output:
+  pdf_document:
+    highlight: tango
+    keep_tex: yes
+    toc: yes
+  html_document:
+    df_print: paged
+    toc: yes
+  include: null
+  ioslides_presentation:
+    highlight: tango
+  prettydoc::html_pretty:
+    css: style.css
+    theme: leonids
+    toc: yes
+  beamer_presentation:
+    highlight: tango
+  slide_level: 2
+  slidy_presentation:
+    fig.height: 3
+    fig.width: 4
+    highlight: tango
+graphics: yes
+header-includes:
+- \usepackage{color}
+- \usepackage{bm}
+institute: University of Trieste
+fontsize: 10pt
+---
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.align = 'center', warning=FALSE, message=FALSE, fig.asp=0.625, fig.height =10, fig.width = 8, out.width='750px', dpi=200, 
+  dev='png', global.par = TRUE, dev.args=list(pointsize=10), fig.path = 'figs/')
+library(MASS)
+```
+```{r setup, include=FALSE}
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+**Totale**: 160 euro
+
+*1X2*: 67 euro
+
+*Risultati secchi*: 20 euro
+
+*Finaliste*: 52 euro
+
+*Vincente manifestazione*: 21 euro
+
+
+Criterio del principio atteso per le puntate + criterio di Kelly per stabilire quanto puntare su ciascuna partita.
+
+
+```{r puntate, echo=FALSE}
+# Italia-Spagna
+quote5 <- c(2.40, 3.25, 3.1)
+prob5 <- c(0.488, 0.269, 0.243)
+# Inghilterra-Danimarca
+quote6 <-c(1.72, 3.6, 5.25)
+prob6 <-c(0.505, 0.269, 0.226)
+# qualificate
+quote7 <- c(1.7, 2.05)
+prob7 <- c(prob5[1]+prob5[2]/2, prob5[3]+prob5[3]/2) 
+
+quote8 <-c(1.33, 3.25)
+prob8 <- c(prob6[1]+prob6[2]/2, prob6[3]+prob6[3]/2) 
+
+# vincente torneo
+
+quotew <- c(2.5, 3.25, 3.75, 10)
+probw<-c(0.294, 0.342, 0.223,0.14)
+teamw <- c("Eng", "Ita", "Spain", "Denmark")
+
+## semifinali
+
+quote <- rbind(quote5, quote6)
+prob <- rbind(prob5, prob6)
+tot_euro <- 140
+tab<-round(quote*prob,2)
+rownames(tab)<- c("Ita-Spa", "Eng-Dan")
+colnames(tab) <- c("1", "X", "2")
+ # kelly algorithm matches
+puntate <- c( (tab[1,1]-(1-prob[1,1]))/quote[1,1], 
+              (tab[2,3]-(1-prob[2,3]-prob[2,2]))/2)*tot_euro
+#puntate <- round(puntate*tot_euro/sum(puntate))
+
+
+tabw <- round(quotew*probw,2)
+tabw <- cbind( probw, tabw, rep("",4))
+ordw<- sort.int(as.numeric(as.vector(tabw[,2])),
+                index.return=TRUE,
+         decreasing = TRUE)
+tabw[,2] <- ordw$x
+tabw[,1] <- tabw[,1][ordw$ix]
+  rownames(tabw) <- teamw[ordw$ix]
+
+
+tab <- rbind(tab, tabw)
+
+
+ # kelly algorithm winner
+puntatew <- c( (as.numeric(tabw[1,2])-(1-as.numeric(tabw[1,1])))/quotew[4],
+               (as.numeric(tabw[2,2])-(1-as.numeric(tabw[2,1])))/quotew[2])*tot_euro
+
+ # kelly algorithm qualificate
+
+tabq <- as.matrix(rbind(prob7, prob8)*rbind(quote7,quote8))
+puntateq <- c( ((tabq[1,1])-(1-(tabq[1,2])))/quote7[1],
+               0
+               #((tabq[2,2])-(1-(tabq[2,1])))/quote8[2]
+               )*tot_euro
+tabq <- cbind(tabq, rep("",2))
+rownames(tabq) <- c("Ita", "Den")
+tab <- rbind(tab, tabq)
+
+
+
+tot_puntate <-c(puntate, puntatew, puntateq)
+tot_puntate <- round(tot_puntate*tot_euro/sum(tot_puntate),0)
+
+atteso <- c( tot_puntate[1] *quote[1,1], tot_puntate[2]*2,
+             tot_puntate[3]*quotew[4], tot_puntate[4]*quotew[2],
+             tot_puntate[5]*quote7[1],
+             tot_puntate[6]*quote8[2])
+atteso <- as.numeric(as.vector(atteso))
+puntate_secchi <- c("10e (1-0)", "10e (1-0)")
+atteso_secchi <- c("80", "60")
+
+rule <- c("1", "X2", "Den", "Ita", "", "", "Ita", "Den")
+tab<-cbind(tab, rule, c(tot_puntate[1:4], rep("",2), tot_puntate[5:6]),
+                      c(puntate_secchi, rep("",6)),
+                        c(atteso[1:4], rep("",2), atteso[5:6]),
+                          c(atteso_secchi, rep("",6)) )
+
+colnames(tab)<-c("1", "X", "2", "Rule", "Puntate", "punt. secchi", "Atteso", "Atteso secchi")
+knitr::kable(tab)
+
+```

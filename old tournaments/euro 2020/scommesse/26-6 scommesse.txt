@@ -1,0 +1,130 @@
+Il modello ha dato come risultato secco più probabile quello poi realmente verificatosi
+7 volte su 36, che è un ottimo score, se pensate che in media il secco più probabile
+paga x7, x8 circa. Quindi tranquillamente giocando SOLO il secco più probabile sulle
+36 partite dei gironi saremmo in attivo di circa il 35%-40%.
+
+In più, sugli 1X2 il modello ha una probabilità di "riuscita" dello 0.458, che è
+un indicatore alto, se pensate che se uno scommettesse alla cieca, cioè puntando a caso
+su uno dei tre esiti, la probabilità sarebbe di 1/3.
+
+Quindi, per queste restanti 15 partite, che sono più complicate siccome c'è anche 
+l'eventualità supplementari e le squadre sono ancora più equilibrate, prpongo la seguente
+strategia che sui gironi ci avrebbe portato a un attivo più alto.
+
+--> si scommette sull'1X2 più probabile una parte consistente (30,40, 50 euro a seconda 
+    delle probabilità)
+
+--> si scommettono 8-10 euro circa SOLO sul secco più probabile, al massimo su due di loro
+
+--> si valutano eventuali combinate, per esempio su 2-3 partite, scommettendo giusto
+    qualcosina (5-7 euro) che poi darebbe un bell'attivo in caso di vittoria. 
+
+
+1) Galles-Danimarca
+
+Danimarca favoritissima dalle quote, il modello dice più equilibrio, con 0-0 come mlo,
+ma anche 1-1, 1-0 e 0-1 molto probabili.
+Quindi, principio guadagno atteso consiglia fortemente di puntare su Galles vincente (paga x5),
+e poi mi giocherei un po' di secchi, visto l'equilibrio.
+
+
+20 euro Galles vincente (paga x5 circa)
+0-0 --> 12 euro (paga x 6.5)
+1-1 --> 8 euro (paga x 7 circa)
+
+Tot: 40 euro
+
+2) Italia-Austria
+
+Quote e modello d'accordo, si punta su Italia vincente. mlo è 1-0
+
+50 euro Italia vincente (paga x1.45)
+1-0 --> 10 euro (paga x 6 circa)
+2-0 --> 5 euro (paga x 6.5 circa)
+
+Tot: 65 euro
+
+ 
+3) Olanda-Rep.Ceca
+
+Olanda favorita, anche se principio guadagno atteso suggerisce puntata lieve su pareggio.
+Mlo è 1-0 Olanda, punterei su Olanda
+
+50 euro su Olanda (paga x1.65 circa)
+1-0 Olanda --> 10 euro (paga x8 circa)
+2-0 Olanda --> 5 euro (paga x 8.5 circa)
+1-1 --> 10 euro (paga x7.5circa)
+
+Tot: 75 euro
+
+4) Belgio-Portogallo
+
+Belgio favorito, ma secondo modello più che per le quote.
+Puntare su vittoria belga. mlo è 2-0 Belgio
+
+30 euro Belgio vincente (paga x 2.4 circa)
+2-0 Belgio --> 10 euro (paga x13 circa)
+1-0 Belgio --> 5 euro (paga x9 circa)
+2-1 Belgio --> 5 euro (paga x11 circa)
+1-1 --> 10 euro (paga x6.5 circa)
+
+Tot: 55 euro
+
+5) Croazia-Spagna
+
+Quote dicono Spagna, modello dice Spagna leggermente favorita ma tanto equilibrio.
+Il principio del guadagno atteso spinge tanto per puntare sulla Croazia.
+Punterei su combinate Croazia & pareggio.
+
+30 euro Croazia o pareggio (paga x2.25 circa)
+
+0-0 --> 7 euro (paga x8.5 circa)
+1-1 --> 20 euro (paga x7.5)
+1-0 Spagna --> 15 euro (paga x6.5)
+2-0 Spagna --> 15 euro (paga x7)
+2-1 Spagna --> 10 euro (paga x9.5 circa)
+1-0 Croazia --> 10 euro (paga x15)
+
+Tot: 107 euro
+
+6) Francia-Svizzera
+
+Francia favorita, secondo modello anche leggeremente più delle quote.
+
+70 euro su Francia vincente (paga x1.6)
+
+1-1 --> 13 euro (paga x8 circa)
+1-0 Francia --> 15 euro (paga x6 circa)
+2-0 Francia --> 15 euro (paga x7.5 circa)
+3-0 Francia --> 10 euro (paga x13 circa)
+
+Tot: 123 euro
+
+7) Inghilterra-Germania
+
+
+Il modello dice Inghilterra, che gioca in casa, ben più di quanto lo dicano le quote, che comunque
+danno come leggera favorita l'Inghilterra. Si punta su Inghilterra, che non ha MAI (MAI!!) 
+vinto una partita a eliminazione diretta degli europei nei 90 minuti...noi puntiamo
+sulla prima volta!! mlo è 1-0 Inghilterra
+
+30 euro Inghilterra vincente (paga x2.5)
+
+1-0 Inghilterra --> 15 euro (paga x8.5)
+1-1 --> 10 euro (paga x6.5)
+2-1 Inghilterra --> 7 euro (paga x11)
+2-0 Inghilterra --> 5 euro (paga x13)
+
+Tot: 67 euro
+
+
+8) Svezia-Ucraina
+
+Modello dice Svezia. mlo è 1-0 svezia
+
+30 euro Svezia vincente (paga x2.4 circa)
+
+1-0 Svezia --> 15 euro (paga x7 circa)
+2-0 Svezia --> 10 euro (paga x 12 circa)
+
+Tot: 55 euro
