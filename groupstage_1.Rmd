@@ -51,7 +51,7 @@ local({
 
 # The statistical model (in brief)
 
-We use a **diagonal-inflated Bivariate-Poisson model with dynamic team-specific abilities** for the attack and the defence. Let $(X_{i}, Y_{i})$ denote the random number of goals scored by the home and the away team in the $i$-th game, $i=1,\ldots,n$, respectively. $\mathsf{ranking}$ denotes the Coca-Cola FIFA ranking at October 6th, 2022, whereas att and def denote the attack and the defence abilities, respectively.
+We use a **diagonal-inflated Bivariate-Poisson model with dynamic team-specific abilities** for the attack and the defence. Let $(X_{i}, Y_{i})$ denote the random number of goals scored by the home and the away team in the $i$-th game, $i=1,\ldots,n$, respectively. $\mathsf{ranking}$ denotes the Coca-Cola FIFA ranking at April 4th, 2024, whereas att and def denote the attack and the defence abilities, respectively.
 
 
 \begin{align}
