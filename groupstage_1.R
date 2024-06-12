@@ -1,3 +1,4 @@
+rm(list=ls())
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Libraries 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -7,12 +8,14 @@ library(footBayes)
 library(loo)
 library(ggplot2)
 library(patchwork)
+library(stringi)
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Global variables
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 DATA_PATH="data/"
 IMG_PATH="imgs/"
+TABLES_PATH="tables/"
 STAN_ITERS=2000
 STAN_CORES=4
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,16 +26,16 @@ STAN_CORES=4
 # Rankings dataset
 #-------------------------------------------------------------------------------
 fifa_ranking<-  read.csv2(paste0(DATA_PATH, "fifa_ranking.csv"),
-                         sep=",",
-                         header=TRUE)
+                          sep=",",
+                          header=TRUE)
 fifa_ranking$total_points <- as.numeric(as.vector(fifa_ranking$total_points))/(10^3)
 
 fifa_ranking_2024<- fifa_ranking %>% 
   filter(rank_date == "2024-04-04") %>% 
   select(country_full, total_points)
-  # %>%
+# %>%
 #arrange(desc(total_points)) %>%
-  #slice(1:150)
+#slice(1:150)
 colnames(fifa_ranking_2024) <- c("team_name", "ranking")
 
 fifa_ranking_2024<- fifa_ranking_2024 %>%
@@ -61,22 +64,21 @@ euro_data_train <- arrange(euro_data_train, date)
 euro_data_train <- euro_data_train %>%
   filter(!is.na(euro_data_train$home_score) & !is.na(euro_data_train$away_score) )
 
-
 low_teams <- c("Faroe Islands", "Latvia",  "Malta",
-"San Marino", "Liechtenstein", "Gibraltar","Andorra",
-"Haiti","Sint Maarten","CuraÃÂÃÂÃÂÃÂ§ao",
-"Grenada","Cuba","Turks and Caicos Islands",
-"Jersey", "Hitra", "Isle of Man",
-"Yorkshire", "Panjab", "Somaliland",
-"Kernow", "Barawa", "Chagos Islands",
-"Cascadia", "Parishes of Jersey", "Alderney",
-"Yoruba Nation",   "Matabeleland", "Biafra",
-"Mapuche", "Maule Sur", "Aymara", "Saint Helena",
-"Shetland", "Ynys MÃÂÃÂÃÂÃÂ´n", "Orkney", "Guernsey", "Western Isles","Timor-Leste","Antigua and Barbuda")
+               "San Marino", "Liechtenstein", "Gibraltar","Andorra",
+               "Haiti","Sint Maarten",
+               "Grenada","Cuba","Turks and Caicos Islands",
+               "Jersey", "Hitra", "Isle of Man",
+               "Yorkshire", "Panjab", "Somaliland",
+               "Kernow", "Barawa", "Chagos Islands",
+               "Cascadia", "Parishes of Jersey", "Alderney",
+               "Yoruba Nation",   "Matabeleland", "Biafra",
+               "Mapuche", "Maule Sur", "Aymara", "Saint Helena",
+               "Shetland","Orkney", "Guernsey", "Western Isles","Timor-Leste","Antigua and Barbuda")
 # 
 # Keep only matches where teams are not in low_teams
 euro_data_train <- euro_data_train %>%
-   filter(!(home_team %in% low_teams) & !(away_team %in% low_teams))
+  filter(!(home_team %in% low_teams) & !(away_team %in% low_teams))
 
 # Guarantee the teams are in the ranking
 euro_data_train <- euro_data_train %>%
@@ -112,7 +114,7 @@ euro_data_stan <-rbind(euro_data_train, euro_data_test)
 
 fit <- stan_foot(data = euro_data_stan[,-6],
                  model="diag_infl_biv_pois",
-                 iter = 2000, cores = 4,
+                 iter = STAN_ITERS, cores = STAN_CORES,
                  predict= ngames_prev,
                  ranking = euro_ranking,
                  dynamic_type = "seasonal",
@@ -123,4 +125,5 @@ prob <- foot_prob(fit, euro_data_stan[,-6])
 colnames(prob$prob_table) <- c("home", "away",
                                "home win", "draw", "away win", "mlo")
 knitr::kable(prob$prob_table)
+write.csv(prob$prob_table, paste0(TABLES_PATH,"groupstage_1.csv"), row.names = FALSE)
 prob$prob_plot
