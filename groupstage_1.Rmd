@@ -88,6 +88,7 @@ library(stringi)
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 DATA_PATH="data/"
 IMG_PATH="imgs/"
+TABLES_PATH="tables/"
 STAN_ITERS=2000
 STAN_CORES=4
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -186,7 +187,7 @@ euro_data_stan <-rbind(euro_data_train, euro_data_test)
 
 fit <- stan_foot(data = euro_data_stan[,-6],
                  model="diag_infl_biv_pois",
-                 iter = 2000, cores = 4,
+                 iter = STAN_ITERS, cores = STAN_CORES,
                  predict= ngames_prev,
                  ranking = euro_ranking,
                  dynamic_type = "seasonal",
@@ -197,7 +198,12 @@ prob <- foot_prob(fit, euro_data_stan[,-6])
 colnames(prob$prob_table) <- c("home", "away",
                                "home win", "draw", "away win", "mlo")
 knitr::kable(prob$prob_table)
+#save prob$prob_table as csv
+write.csv(prob$prob_table, paste0(TABLES_PATH,"groupstage_1.csv"), row.names = FALSE)
 prob$prob_plot
 ```
 
 
+```{r}
+teams=euro_train
+```
