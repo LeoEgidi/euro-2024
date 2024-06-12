@@ -1,7 +1,7 @@
 ---
 title: "EURO 2024 groupstage predictions: 1st match day"
 author: "Leonardo Egidi - Giulio Fantuzzi | University of Trieste"
-date: "12th June 2022"
+date: "12th June 2024"
 output:
   pdf_document:
     highlight: tango
