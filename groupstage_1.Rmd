@@ -202,8 +202,3 @@ knitr::kable(prob$prob_table)
 write.csv(prob$prob_table, paste0(TABLES_PATH,"groupstage_1.csv"), row.names = FALSE)
 prob$prob_plot
 ```
-
-
-```{r}
-teams=euro_train
-```
