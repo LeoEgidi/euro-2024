@@ -75,7 +75,7 @@ The idea is to provide a dynamic predictive scenario: at the end of each match-d
 
 Posterior  matches probabilities from the posterior predictive distribution of the model above are displayed in the table below. **mlo** denotes the most likely exact outcome (in parenthesis, the corresponding posterior probability). Darker regions in the plots below denote more likely outcomes: on the $x$-axis the home goals, on the $y$-axis the away goals. 
 
-```{r groupstage, echo = FALSE, out.width="80%", fig.width=11, eval = TRUE, fig.height=16,warning=FALSE, message=FALSE}
+```{r groupstage1, echo = FALSE, out.width="80%", fig.width=11, eval = TRUE, fig.height=16,warning=FALSE, message=FALSE}
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Libraries 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
