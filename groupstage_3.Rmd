@@ -241,6 +241,6 @@ prob <- foot_prob(fit, euro_data_stan[,-6])
 colnames(prob$prob_table) <- c("home", "away",
                                "home win", "draw", "away win", "mlo")
 knitr::kable(prob$prob_table)
-write.csv(prob$prob_table, paste0(TABLES_PATH,"groupstage_2.csv"), row.names = FALSE)
+write.csv(prob$prob_table, paste0(TABLES_PATH,"groupstage_3.csv"), row.names = FALSE)
 prob$prob_plot
 ```
