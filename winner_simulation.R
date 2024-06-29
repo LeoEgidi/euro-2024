@@ -1,3 +1,4 @@
+rm(list=ls())
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Libraries 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -5,6 +6,7 @@ library(tidyverse)
 library(dplyr)
 library(ggplot2)
 library(footBayes)
+library(rstan)
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Global variables
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -12,13 +14,14 @@ DATA_PATH="data/"
 IMG_PATH="imgs/"
 TABLES_PATH="tables/"
 MODELS_PATH="models/"
-STAN_ITERS=2000
-STAN_CORES=4
+INFLATED_RUN=TRUE
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Data preparation
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 euro_data_stan<- read.csv(paste0(DATA_PATH,"euro_data_stan.csv"))
 euro_ranking<- read.csv(paste0(DATA_PATH,"euro_ranking.csv"))
+euro_train_teams=unique(euro_data_stan$home_team)
+
 
 load(paste0(MODELS_PATH,"knockout_model.RData"))
 pars=extract(fit)
@@ -48,19 +51,25 @@ simulate_match<- function(matchname,teams,rankings,pars){
   l3= exp(pars$rho)
   
   # Modello direttamente la differenza retu
-  GoalDiffs = rep(0,4000)
-  for(s in 1:4000){
-    x= rpois(1,l1[s]+l3[s])
-    y= rpois(1,l2[s]+l3[s])
-    GoalDiffs[s]=x-y
+  GoalDiffs = vector("numeric",4000)
+  GoalDiffs=rpois(n=4000, lambda=l1+l3)-rpois(n=4000, lambda=l2+l3)
+  
+  
+  #.............................................................................
+  # Indexes to inflate (OPTIONAL)
+  #.............................................................................
+  if(INFLATED_RUN){
+    idx_inflated= runif(4000)<=p
+    GoalDiffs[idx_inflated]=0
   }
+  #.............................................................................
+  
   
   Pr_H=mean(GoalDiffs > 0)
   Pr_D=mean(GoalDiffs == 0)
   Pr_A=mean(GoalDiffs < 0)
   
-  Winner= ifelse(GoalDiffs>0,HomeTeam,
-                  ifelse(GoalDiffs<0,AwayTeam,"Draw"))
+  Winner= ifelse(GoalDiffs>0,HomeTeam,ifelse(GoalDiffs<0,AwayTeam,"Draw"))
   
   # Manage the draws: we "flip the coin" for the winner!
   n_draws=sum(GoalDiffs == 0)
@@ -194,7 +203,8 @@ winner_df= data.frame(
   WinningProbability=as.numeric(winner_probs)
 )
 
-write.csv(winner_df, paste0(DATA_PATH,"winner_probs.csv"), row.names = FALSE)
-winner_df=read.csv(paste0(DATA_PATH,"winner_probs.csv"))
-
-                   
+if(INFLATED_RUN){
+  write.csv(winner_df, paste0(DATA_PATH,"winner_probs_inflated.csv"), row.names = FALSE)
+}else{
+  write.csv(winner_df, paste0(DATA_PATH,"winner_probs.csv"), row.names = FALSE)
+}
