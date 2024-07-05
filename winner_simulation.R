@@ -23,9 +23,9 @@ euro_ranking<- read.csv(paste0(DATA_PATH,"euro_ranking.csv"))
 euro_train_teams=unique(euro_data_stan$home_team)
 
 
-load(paste0(MODELS_PATH,"knockout_model.RData"))
-pars=extract(fit)
-
+#load(paste0(MODELS_PATH,"knockout_model.RData"))
+#pars=extract(fit)
+load(paste0(MODELS_PATH,"quarter-final_pars.RData"))
 simulate_match<- function(matchname,teams,rankings,pars){
   #teams=sort(teams)
   HomeTeam <- strsplit(matchname,'-')[[1]][1]
@@ -97,76 +97,29 @@ winner=rep(NA,N_sim)
 
 for(i in 1:N_sim){
   #-----------------------------------------------------------------------------
-  # SIMULAZIONE OTTAVI
-  #-----------------------------------------------------------------------------
-  cat("...running simulation ",i,"/",N_sim,",...\n")
-  ottavi1_winner=simulate_match(matchname="Switzerland-Italy",
-                 teams=euro_train_teams,
-                 rankings=euro_ranking,
-                 pars=pars)
-  
-  ottavi2_winner=simulate_match(matchname="England-Slovakia",
-                 teams=euro_train_teams,
-                 rankings=euro_ranking,
-                 pars=pars)
-  
-  ottavi3_winner=simulate_match(matchname="Romania-Netherlands",
-                    teams=euro_train_teams,
-                    rankings=euro_ranking,
-                    pars=pars)
-  
-  ottavi4_winner=simulate_match(matchname="Austria-Turkey",
-                    teams=euro_train_teams,
-                    rankings=euro_ranking,
-                    pars=pars)
-  ottavi5_winner=simulate_match(matchname="Germany-Denmark",
-                    teams=euro_train_teams,
-                    rankings=euro_ranking,
-                    pars=pars)
-  
-  ottavi6_winner=simulate_match(matchname="Spain-Georgia",
-                    teams=euro_train_teams,
-                    rankings=euro_ranking,
-                    pars=pars)
-  
-  ottavi7_winner=simulate_match(matchname="France-Belgium",
-                    teams=euro_train_teams,
-                    rankings=euro_ranking,
-                    pars=pars)
-  
-  ottavi8_winner=simulate_match(matchname="Portugal-Slovenia",
-                    teams=euro_train_teams,
-                    rankings=euro_ranking,
-                    pars=pars)
-  
-  #-----------------------------------------------------------------------------
   # SIMULAZIONE QUARTI
   #-----------------------------------------------------------------------------
-  quarti1 <- paste(ottavi1_winner, ottavi2_winner, sep = "-")
-  quarti2 <- paste(ottavi3_winner, ottavi4_winner, sep = "-")
-  quarti3 <- paste(ottavi5_winner, ottavi6_winner, sep = "-")
-  quarti4 <- paste(ottavi7_winner, ottavi8_winner, sep = "-")
+  cat("...running simulation ",i,"/",N_sim,",...\n")
+  quarti1_winner=simulate_match(matchname="Spain-Germany",
+                 teams=euro_train_teams,
+                 rankings=euro_ranking,
+                 pars=pars)
   
-  # Quarti winner
-  quarti1_winner=simulate_match(matchname=quarti1,
-                            teams=euro_train_teams,
-                            rankings=euro_ranking,
-                            pars=pars)
+  quarti2_winner=simulate_match(matchname="Portugal-France",
+                 teams=euro_train_teams,
+                 rankings=euro_ranking,
+                 pars=pars)
   
-  quarti2_winner=simulate_match(matchname=quarti2,
-                            teams=euro_train_teams,
-                            rankings=euro_ranking,
-                            pars=pars)
+  quarti3_winner=simulate_match(matchname="England-Switzerland",
+                    teams=euro_train_teams,
+                    rankings=euro_ranking,
+                    pars=pars)
   
-  quarti3_winner=simulate_match(matchname=quarti3,
-                            teams=euro_train_teams,
-                            rankings=euro_ranking,
-                            pars=pars)
+  quarti4_winner=simulate_match(matchname="Netherlands-Turkey",
+                    teams=euro_train_teams,
+                    rankings=euro_ranking,
+                    pars=pars)
   
-  quarti4_winner=simulate_match(matchname=quarti4,
-                            teams=euro_train_teams,
-                            rankings=euro_ranking,
-                            pars=pars)
   
   #-----------------------------------------------------------------------------
   # SIMULAZIONE SEMIFINALI
