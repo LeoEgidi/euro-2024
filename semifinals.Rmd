@@ -1,7 +1,7 @@
 ---
-title: "EURO 2024 knockout predictions: Quarter-final"
+title: "EURO 2024 knockout predictions: Semifinals"
 author: "Leonardo Egidi - Giulio Fantuzzi | University of Trieste"
-date: "05th July 2024"
+date: "09th July 2024"
 output:
   pdf_document:
     highlight: tango
@@ -71,11 +71,11 @@ Lines (1) displays the likelihood's equations (diagonal inflated bivariate Poiss
 
 The idea is to provide a dynamic predictive scenario: at the end of each match-day, the model will be refitted  to predict the remaining matches.
 
-# Knockout predictions: Quarter-final (05th July - 06th July)
+# Knockout predictions: Semifinals (09th July - 10th July)
 
 Posterior  matches probabilities from the posterior predictive distribution of the model above are displayed in the table below. **mlo** denotes the *most likely exact outcome* (in parenthesis, the corresponding posterior probability). Darker regions in the plots below denote more likely outcomes: on the $x$-axis the home goals, on the $y$-axis the away goals. 
 
-```{r quarter-final, echo = FALSE, out.width="80%", fig.width=11, eval = TRUE, fig.height=16,warning=FALSE, message=FALSE}
+```{r semifinals, echo = FALSE, out.width="80%", fig.width=11, eval = TRUE, fig.height=16,warning=FALSE, message=FALSE}
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Libraries 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -239,27 +239,44 @@ results_round_of_16<- data.frame(
   tournament = rep("UEFA Euro", ngames_prev))
 
 #-------------------------------------------------------------------------------
-# Quarter-final matches
+# Quarter-final results
 #-------------------------------------------------------------------------------
 ngames_prev <- 4
-euro_data_test<- data.frame(
+results_quarter_final<- data.frame(
   date = rep(length(levels(times))+5, ngames_prev),
   
   home_team = c("Spain","Portugal","England","Netherlands"),
   
   away_team = c("Germany","France","Switzerland","Turkey"),
   
-  home_score = rep(NA, ngames_prev),
-  away_score = rep(NA, ngames_prev),
+  home_score = c(1,0,1,2),
+  away_score = c(1,0,1,1),
+  tournament = rep("UEFA Euro",ngames_prev)
+  )
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+# Semifinals matches
+#-------------------------------------------------------------------------------
+ngames_prev <- 2
+euro_data_test<- data.frame(
+  date = rep(length(levels(times))+6, ngames_prev),
+  
+  home_team = c("Spain","Netherlands"),
+  
+  away_team = c("France","England"),
+  
+  home_score = rep(NA,ngames_prev),
+  away_score = rep(NA,ngames_prev),
   tournament = rep(NA,ngames_prev)
   )
-
 #-------------------------------------------------------------------------------
 euro_data_stan <-rbind(euro_data_train,
                        results_groupstage_1,
                        results_groupstage_2,
                        results_groupstage_3,
                        results_round_of_16,
+                       results_quarter_final,
                        euro_data_test)
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -274,12 +291,12 @@ fit <- stan_foot(data = euro_data_stan[,-6],
                  dynamic_type = "seasonal",
                  ind_home = "FALSE")
 pars=extract(fit)
-save(pars, file = paste0(MODELS_PATH,"quarter-final_pars.RData"))
+save(pars, file = paste0(MODELS_PATH,"semifinals_pars.RData"))
 
 prob <- foot_prob(fit, euro_data_stan[,-6])
 colnames(prob$prob_table) <- c("home", "away",
                                "home win", "draw", "away win", "mlo")
 knitr::kable(prob$prob_table)
-write.csv(prob$prob_table, paste0(TABLES_PATH,"quarter-final.csv"), row.names = FALSE)
+write.csv(prob$prob_table, paste0(TABLES_PATH,"semifinals.csv"), row.names = FALSE)
 prob$prob_plot
 ```
